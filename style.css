@@ -140,6 +140,7 @@ i {
 .btn-new { top: 45px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
+.btn-score { top: 557px;}
 
 .dice {
     position: absolute;
@@ -152,3 +153,11 @@ i {
 
 .winner { background-color: #f7f7f7; }
 .winner .player-name { font-weight: 300; color: #EB4D4D; }
+
+.choose-score {
+    position: absolute;
+    left: 35%;
+    top: 87%;
+    text-transform: uppercase;
+    font-weight: 300;
+}

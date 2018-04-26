@@ -3,11 +3,15 @@
 Challenges 1-3 
 
 */
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, winScore;
+
+winScore = 100;
 
 init();
 
 var previousDiceRoll;
+
+//Event Listeners
 
 document.querySelector(".btn-roll").addEventListener("click", function() {
   if (gamePlaying) {
@@ -55,7 +59,7 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
       scores[activePlayer];
   
     //3.  Check if player won game
-    if (scores[activePlayer] >= 100) {
+    if (scores[activePlayer] >= winScore) {
       //game over and do stuff here
       document.querySelector("#name-" + activePlayer).textContent = "Winner!";
       document.querySelector(".dice").style.display = "none";
@@ -67,6 +71,11 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
     }
   }
 });
+
+document.querySelector(".btn-score").addEventListener("click", updateWinScore);
+document.querySelector(".btn-new").addEventListener("click", init);
+
+//Functions
 
 function nextPlayer() {
   //Next player
@@ -85,7 +94,11 @@ function nextPlayer() {
   document.querySelector(".dice").style.display = "none";
 }
 
-document.querySelector(".btn-new").addEventListener("click", init);
+function updateWinScore() {
+  var newWinScore = document.querySelector('#win-score').value;
+  winScore = newWinScore;
+  document.querySelector('#win-score').value = "";
+}
 
 function init() {
   scores = [0, 0];
@@ -110,3 +123,9 @@ function init() {
 
 //var x = document.querySelector('#score-0').textContent;
 //console.log(x);
+
+//1.  Add input field to HTML
+//2.  Style and positioning appropriately
+//3.  User can type into the field and enter the winning score
+//4.  After submitting, value goes back to 0
+//5.  Update the variable in JS
