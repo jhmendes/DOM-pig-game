@@ -3,50 +3,49 @@
 Challenges 1-3 
 
 */
+
 var scores, roundScore, activePlayer, gamePlaying, winScore;
 
 winScore = 100;
 
 init();
 
-var previousDiceRoll;
-
 //Event Listeners
 
 document.querySelector(".btn-roll").addEventListener("click", function() {
   if (gamePlaying) {
  
-    //1. Random number needed when someone clicks
+    //1. Random numbers needed when someone clicks
     var dice = Math.floor(Math.random() * 6) + 1;
-      
+    var diceTwo = Math.floor(Math.random() * 6) + 1;
     //2. Display the result
     var diceDOM = document.querySelector(".dice");
+    var diceDOMTwo = document.querySelector(".dice-2");
+    console.log(dice, diceTwo);
+    
     diceDOM.style.display = "block";
     diceDOM.src = "dice-" + dice + ".png";
+    diceDOMTwo.style.display = "block";
+    diceDOMTwo.src = "dice-" + diceTwo + ".png";
     // diceDOM.src = `dice-${dice}.png`;
-
     //3. Update the round score IF the rolled number was not 1
-    //If rolled dice is 6, check to see if previously rolled dice is a 6
-    // If it is, scores[activePlayer] is set to 0, update UI to 0, and call nextPlayer function
+    //If dice one and dice two = 6, lose all the scores, call nextPlayer 
 
-    if (dice === 6 && previousDiceRoll === 6) {
+    if (dice === 6 && diceTwo === 6) {
       document.querySelector(
         "#score-" + activePlayer
       ).textContent = '0';
       scores[activePlayer] = 0;
       nextPlayer();
-    } else if (dice !== 1) {
-      //Add score
-      roundScore += dice;
-      document.querySelector(
-        "#current-" + activePlayer
-      ).textContent = roundScore;
-    } else {
-      //Next player
+    } else if (dice === 1 || diceTwo === 1) {
       nextPlayer();
+    } else {
+       //Add score
+       roundScore += (dice + diceTwo);
+       document.querySelector(
+         "#current-" + activePlayer
+       ).textContent = roundScore;
     }
-    previousDiceRoll = dice;
-
   }
 });
 
@@ -92,13 +91,13 @@ function nextPlayer() {
   document.querySelector(".player-0-panel").classList.toggle("active");
   document.querySelector(".player-1-panel").classList.toggle("active");
   document.querySelector(".dice").style.display = "none";
+  document.querySelector(".dice-2").style.display = "none";
 }
 
 function updateWinScore() {
   var newWinScore = document.querySelector('#win-score').value;
   winScore = newWinScore;
   document.querySelector('#win-score').value = "";
-  
 }
 
 function init() {
@@ -107,6 +106,7 @@ function init() {
   activePlayer = 0;
   gamePlaying = true;
   document.querySelector(".dice").style.display = "none";
+  document.querySelector(".dice-2").style.display = "none";
   document.getElementById("score-0").textContent = "0";
   document.getElementById("score-1").textContent = "0";
   document.getElementById("current-0").textContent = "0";
@@ -129,11 +129,9 @@ function init() {
 //2. Player looses current score if one of the dice is a 1
 //3.  You'll need Css to position the second dice
 
-//Add in a second dice variable
+//Add in a second dice variable via HTML
 //Set up the img for the dice variable
 //Position via CSS
+//Hide with JS inside init function
 //Check both for any ones
 //Add the total score of both dice together
-
-
-
