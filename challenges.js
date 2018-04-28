@@ -98,6 +98,7 @@ function updateWinScore() {
   var newWinScore = document.querySelector('#win-score').value;
   winScore = newWinScore;
   document.querySelector('#win-score').value = "";
+  
 }
 
 function init() {
@@ -124,8 +125,15 @@ function init() {
 //var x = document.querySelector('#score-0').textContent;
 //console.log(x);
 
-//1.  Add input field to HTML
-//2.  Style and positioning appropriately
-//3.  User can type into the field and enter the winning score
-//4.  After submitting, value goes back to 0
-//5.  Update the variable in JS
+//1.  Add another dice, so two dices in a row
+//2. Player looses current score if one of the dice is a 1
+//3.  You'll need Css to position the second dice
+
+//Add in a second dice variable
+//Set up the img for the dice variable
+//Position via CSS
+//Check both for any ones
+//Add the total score of both dice together
+
+
+
